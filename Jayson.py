@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
+
 from player import Player
 
 pygame.init()
@@ -56,6 +57,7 @@ while running:
     # GAME STATE UPDATES
     # All game math and comparisons happen here
 
+    #chceks for button clicks and if player has hit a boundry or not
     if player.pressed_up and player.y - player.radius >= 0:
         player.move_up()
     if player.pressed_down and player.y + player.radius <= HEIGHT:
