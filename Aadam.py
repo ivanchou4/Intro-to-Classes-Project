@@ -1,3 +1,6 @@
+# https://mrgallo.github.io/fundamentals/pygame/bouncing-ball.html
+# https://mrgallo.github.io/fundamentals/pygame/using-classes-to-store-data.html
+
 # pygame template
 import random
 
@@ -55,6 +58,10 @@ while running:
     # GAME STATE UPDATES
     # All game math and comparisons happen here
     for ball in balls:
+        if ball.x > WIDTH or ball.x < 0:
+            ball.dx *= -1
+        if ball.y > HEIGHT or ball.y < 0:
+            ball.dy *= -1  
         ball.x += ball.dx
         ball.y += ball.dy
 
