@@ -7,9 +7,6 @@ PYGAME TEMPLATE
 import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, MOUSEBUTTONDOWN
 
-from square import Square
-
-
 pygame.init()
 
 WIDTH = 640
@@ -22,7 +19,6 @@ clock = pygame.time.Clock()
 # ---------------------------
 # Initialize global variables
 
-square = Square(10,10)
 # ---------------------------
 
 running = True
@@ -40,13 +36,12 @@ while running:
     # GAME STATE UPDATES
     # All game math and comparisons happen here
 
-    square.move()
 
             
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
 
-    square.draw(screen)
+
 
 
     # Must be the last two lines
