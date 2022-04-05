@@ -1,6 +1,5 @@
 import pygame
 
-#need player collisions
 class Player:
     def __init__(self):
         self.x= 100
@@ -21,8 +20,13 @@ class Player:
     def move_right(self):
         self.x += self.speed
 
+    def on_collision(self):
+        pass
+
     def draw(self, surface):
         pygame.draw.circle(surface, (0,0,10), (self.x,self.y), self.radius)
+
+
 
 
 
