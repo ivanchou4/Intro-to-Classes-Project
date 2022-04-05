@@ -74,7 +74,7 @@ while running:
     # Must be the last two lines
     # of the game loop
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(60)
     #---------------------------
 
 
