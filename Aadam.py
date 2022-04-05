@@ -1,6 +1,3 @@
-# https://mrgallo.github.io/fundamentals/pygame/bouncing-ball.html
-# https://mrgallo.github.io/fundamentals/pygame/using-classes-to-store-data.html
-
 # pygame template
 import random
 
@@ -32,8 +29,6 @@ clock = pygame.time.Clock()
 # Initialize global variables
 
 balls = [
-    Ball(50, 50, 5, 1),
-    Ball(400, 200, -3, 1)
 ]
 
 for _ in range(10):
