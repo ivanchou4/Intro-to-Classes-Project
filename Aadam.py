@@ -3,14 +3,15 @@ import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
 
 class Ball:
-    def __init__(self, x: int, y: int, dx: int, dy: int) -> None:
+    def __init__(self, x: int, y: int, dx: int, dy: int, radius: int) -> None:
         self.x = x
         self.y = y
         self.dx = dx
         self.dy = dy
-        r = random.randrange(0, 256,)
-        g = random.randrange(0, 256,)
-        b = random.randrange(0, 256,)
+        self.radius = radius
+        r = random.randrange(0, 256)
+        g = random.randrange(0, 256)
+        b = random.randrange(0, 256)
         self.color = (r, g, b)
 
 pygame.init()
@@ -31,7 +32,8 @@ for _ in range(10):
     y = random.randrange(0, HEIGHT)
     dx = random.randrange(-5, 5)
     dy = random.randrange(-5, 5)
-    b = Ball(x, y, dx, dy)
+    radius = 40
+    b = Ball(x, y, dx, dy, radius)
     balls.append(b)
 
 
@@ -46,9 +48,9 @@ while running:
 
     
     for ball in balls:
-        if ball.x > WIDTH or ball.x < 0:
+        if ball.x + ball.radius > WIDTH or ball.x - ball.radius < 0:
             ball.dx *= -1
-        if ball.y > HEIGHT or ball.y < 0:
+        if ball.y + ball.radius > HEIGHT or ball.y - ball.radius < 0:
             ball.dy *= -1  
         ball.x += ball.dx
         ball.y += ball.dy
@@ -57,7 +59,7 @@ while running:
     screen.fill((255, 255, 255))
 
     for ball in balls:
-        pygame.draw.circle(screen, ball.color, (ball.x, ball.y), 30)
+        pygame.draw.circle(screen, ball.color, (ball.x, ball.y), ball.radius)
 
 
     pygame.display.flip()
