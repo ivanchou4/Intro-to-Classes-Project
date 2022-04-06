@@ -10,7 +10,9 @@ class Player:
         self.pressed_left = False
         self.pressed_right = False
         self.pressed_down = False
+        self.invulnerable = False
 
+    
     def move_up(self):
         self.y -= self.speed
     def move_down(self):
@@ -21,9 +23,13 @@ class Player:
         self.x += self.speed
 
     def on_collision(self):
+        #on collision: reset game (remove items fomr balls and squares list, reset player position) ONLY IF PLAYER IS NOT INVULNERABLE
         pass
 
-    def draw(self, surface):
+    def invulnerable(self):
+        self.invulnerable = True
+    
+    def draw(self, surface):        
         pygame.draw.circle(surface, (0,0,10), (self.x,self.y), self.radius)
 
 
