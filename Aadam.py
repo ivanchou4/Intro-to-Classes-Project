@@ -14,6 +14,9 @@ class Ball:
         b = random.randrange(0, 256)
         self.color = (r, g, b)
 
+    def draw(self, surface):
+        pygame.draw.circle(surface, self.color, (self.x, self.y), self.radius)
+
 pygame.init()
 
 WIDTH = 640
@@ -59,8 +62,7 @@ while running:
     screen.fill((255, 255, 255))
 
     for ball in balls:
-        pygame.draw.circle(screen, ball.color, (ball.x, ball.y), ball.radius)
-
+        ball.draw(screen)
 
     pygame.display.flip()
     clock.tick(60)
