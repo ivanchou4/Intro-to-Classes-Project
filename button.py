@@ -1,3 +1,4 @@
+import pygame
 class ShapeCreatorButton:
     def __init__(self, x: int, y: int, w: int, h: int):
         print("Creating a button")
