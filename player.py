@@ -11,22 +11,26 @@ class Player:
         self.pressed_right = False
         self.pressed_down = False
         self.invulnerable = False
-
     
-    def move_up(self):
-        self.y -= self.speed
-    def move_down(self):
-        self.y += self.speed
-    def move_left(self):
-        self.x -= self.speed
-    def move_right(self):
-        self.x += self.speed
+    def move_up(self, width, height):
+        if self.y - self.radius >= 0:
+            self.y -= self.speed
+    def move_down(self, width, height):
+        if self.y + self.radius <= height:
+            self.y += self.speed
+    def move_left(self, width, height):
+        if self.x - self.radius >= 0:
+            self.x -= self.speed
+    def move_right(self, width, height):
+        if self.x + self.radius <= width:
+            self.x += self.speed
 
     def on_collision(self):
         #on collision: reset game (remove items fomr balls and squares list, reset player position) ONLY IF PLAYER IS NOT INVULNERABLE
         pass
 
     def invulnerable(self):
+        #when you click the button, run this
         self.invulnerable = True
     
     def draw(self, surface):        
