@@ -1,3 +1,6 @@
+import random
+import pygame
+
 class Ball:
     def __init__(self, x: int, y: int, dx: int, dy: int, radius: int) -> None:
         self.x = x
