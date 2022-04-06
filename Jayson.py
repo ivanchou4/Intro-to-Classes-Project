@@ -43,12 +43,7 @@ while running:
                 player.pressed_left = False
             if event.key == K_RIGHT:
                 player.pressed_right = False
-                
 
-
-
-
-                
         elif event.type == QUIT:
             running = False
         elif event.type == MOUSEBUTTONDOWN:
@@ -58,21 +53,21 @@ while running:
     # All game math and comparisons happen here
 
     #chceks for button clicks and if player has hit a boundry or not
-    if player.pressed_up and player.y - player.radius >= 0:
-        player.move_up()
-    if player.pressed_down and player.y + player.radius <= HEIGHT:
-        player.move_down()
-    if player.pressed_left and player.x - player.radius >= 0:
-        player.move_left()
-    if player.pressed_right and player.x + player.radius <= WIDTH:
-        player.move_right()
+    if player.pressed_up:
+        player.move_up(WIDTH, HEIGHT)
+    if player.pressed_down:
+        player.move_down(WIDTH, HEIGHT)
+    if player.pressed_left:
+        player.move_left(WIDTH, HEIGHT)
+    if player.pressed_right:
+        player.move_right(WIDTH, HEIGHT)
             
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
 
     player.draw(screen)
 
-
+    
     # Must be the last two lines
     # of the game loop
     pygame.display.flip()
