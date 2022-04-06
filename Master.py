@@ -1,12 +1,8 @@
-'''
-PYGAME TEMPLATE
-'''
-
-
 
 import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, MOUSEBUTTONDOWN
-
+from ball import Ball
+from button import ShapeCreatorButton
 pygame.init()
 
 WIDTH = 640
@@ -62,7 +58,11 @@ while running:
             
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
+    
+    for ball in balls:
+        ball.draw(screen)
 
+    button.draw(screen)
 
 
 
