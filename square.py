@@ -50,6 +50,9 @@
 
 # pygame.quit()
 
+
+
+# Square class
 import pygame
 import math
 
