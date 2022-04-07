@@ -37,7 +37,7 @@ while running:
 
     
     for ball in balls:
-        ball.move(640, 480)
+        ball.move(WIDTH, HEIGHT)
 
 
     screen.fill((255, 255, 255))
