@@ -1,11 +1,12 @@
 import pygame
+import math
 
 class Player:
     def __init__(self):
         self.x= 100
         self.y = 100
         self.radius = 10
-        self.speed = 5
+        self.speed = 6
         self.pressed_up = False
         self.pressed_left = False
         self.pressed_right = False
@@ -25,13 +26,12 @@ class Player:
         if self.x + self.radius <= width:
             self.x += self.speed
 
-    def on_collision(self):
-        #on collision: reset game (remove items fomr balls and squares list, reset player position) ONLY IF PLAYER IS NOT INVULNERABLE
-        pass
-
-    def invulnerable(self):
-        #when you click the button, run this
-        self.invulnerable = True
+    def on_collision(self, squares, circles):
+        for ball in balls:
+            distance = math.sqrt((ball.x - self.x)**2 + (ball.y - self.y)**2)
+            if distance < ball.radius + self.radius:
+                return True
+            
     
     def draw(self, surface):        
         pygame.draw.circle(surface, (0,0,10), (self.x,self.y), self.radius)
