@@ -19,8 +19,7 @@ clock = pygame.time.Clock()
 
 # ---------------------------
 # Initialize global variables
-pygame.font.init() # you have to call this at the start, 
-                   # if you want to use this module.
+pygame.font.init() 
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
 
@@ -37,8 +36,6 @@ while running:
     # EVENT HANDLING
     for event in pygame.event.get():
         if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                running = False
             if event.key == K_ESCAPE:
                 running = False
             if event.key == K_UP:
