@@ -4,7 +4,7 @@ import math
 
 class Square:
 
-    def __init__(self, x:int, y:int, speed_x: int, speed_y: int): 
+    def __init__(self, x:int, y:int, speed_x: int, speed_y: int) -> None:
         self.x = x
         self.y = y
         self.size = 10
