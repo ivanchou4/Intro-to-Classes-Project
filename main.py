@@ -1,3 +1,4 @@
+
 import pygame
 import random
 from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
@@ -77,7 +78,7 @@ while running:
 
     #updates ball positions
     for ball in balls:
-        ball.move()
+        ball.move(WIDTH, HEIGHT)
         
     #chceks for button clicks and if player has hit a boundry or not
     if player.pressed_up:
