@@ -1,11 +1,12 @@
 
 import pygame
-
-from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, MOUSEBUTTONDOWN
+import random
+from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
 from ball import Ball
 from button import ShapeCreatorButton
 from square import Square
-import random
+from player import Player
+
 
 pygame.init()
 
@@ -23,21 +24,11 @@ pygame.font.init() # you have to call this at the start,
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
 
-
 balls = []
 squares = []
 button = ShapeCreatorButton(20, 20, 150, 50, "ADD", myfont)
-for _ in range(0):
-    x = random.randrange(50, WIDTH-50)
-    y = random.randrange(50, HEIGHT-50)
-    dx = random.randrange(-5, 5)
-    dy = random.randrange(-5, 5)
-    radius = 40
-    b = Ball(x, y, dx, dy, radius)
-    balls.append(b)
 
-
-
+player = Player()
 
 # ---------------------------
 
@@ -59,6 +50,28 @@ while running:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 running = False
+            if event.key == K_ESCAPE:
+                running = False
+            if event.key == K_UP:
+                player.pressed_up = True
+            if event.key == K_DOWN:
+                player.pressed_down = True
+            if event.key == K_LEFT:
+                player.pressed_left = True
+            if event.key == K_RIGHT:
+                player.pressed_right = True
+
+
+        elif event.type == KEYUP:
+            if event.key == K_UP:
+                player.pressed_up = False
+            if event.key == K_DOWN:
+                player.pressed_down = False
+            if event.key == K_LEFT:
+                player.pressed_left = False
+            if event.key == K_RIGHT:
+                player.pressed_right = False
+
         elif event.type == QUIT:
             running = False
         elif event.type == MOUSEBUTTONDOWN:
@@ -76,9 +89,23 @@ while running:
     # All game math and comparisons happen here
     for square in squares:
         square.move()
-            
+
+    #chceks for button clicks and if player has hit a boundry or not
+    if player.pressed_up:
+        player.move_up(WIDTH, HEIGHT)
+    if player.pressed_down:
+        player.move_down(WIDTH, HEIGHT)
+    if player.pressed_left:
+        player.move_left(WIDTH, HEIGHT)
+    if player.pressed_right:
+        player.move_right(WIDTH, HEIGHT)
+
+
+        
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
+
+    player.draw(screen)
     
     for ball in balls:
         ball.draw(screen)
@@ -87,7 +114,6 @@ while running:
         square.draw(screen)
 
     button.draw(screen)
-
 
 
     # Must be the last two lines
