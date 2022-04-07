@@ -37,12 +37,7 @@ while running:
 
     
     for ball in balls:
-        if ball.x + ball.radius > WIDTH or ball.x - ball.radius < 0:
-            ball.dx *= -1
-        if ball.y + ball.radius > HEIGHT or ball.y - ball.radius < 0:
-            ball.dy *= -1  
-        ball.x += ball.dx
-        ball.y += ball.dy
+        ball.move(640, 480)
 
 
     screen.fill((255, 255, 255))
