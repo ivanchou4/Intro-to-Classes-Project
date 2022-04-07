@@ -4,10 +4,10 @@ import math
 
 class Square:
 
-    def __init__(self, x:int, y:int, speed_x: int, speed_y: int) -> None:
+    def __init__(self, x:int, y:int, speed_x: int, speed_y: int): 
         self.x = x
         self.y = y
-        self.size = 10
+        self.size = 20
         self.speed_x = speed_x
         self.speed_y = speed_y
     def move(self) -> None:
