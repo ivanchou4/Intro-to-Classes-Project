@@ -1,4 +1,3 @@
-
 import pygame
 import random
 from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
@@ -27,6 +26,11 @@ balls = []
 squares = []
 button = ShapeCreatorButton(20, 20, 150, 50, "ADD", myfont)
 
+pressed_up = False
+pressed_down = False
+pressed_left = False
+pressed_right = False
+
 player = Player()
 
 # ---------------------------
@@ -39,24 +43,24 @@ while running:
             if event.key == K_ESCAPE:
                 running = False
             if event.key == K_UP:
-                player.pressed_up = True
+                pressed_up = True
             if event.key == K_DOWN:
-                player.pressed_down = True
+                pressed_down = True
             if event.key == K_LEFT:
-                player.pressed_left = True
+                pressed_left = True
             if event.key == K_RIGHT:
-                player.pressed_right = True
+                pressed_right = True
 
 
         elif event.type == KEYUP:
             if event.key == K_UP:
-                player.pressed_up = False
+                pressed_up = False
             if event.key == K_DOWN:
-                player.pressed_down = False
+                pressed_down = False
             if event.key == K_LEFT:
-                player.pressed_left = False
+                pressed_left = False
             if event.key == K_RIGHT:
-                player.pressed_right = False
+                pressed_right = False
 
         elif event.type == QUIT:
             running = False
@@ -80,14 +84,14 @@ while running:
     for ball in balls:
         ball.move(WIDTH, HEIGHT)
         
-    #chceks for button clicks and if player has hit a boundry or not
-    if player.pressed_up:
+    #chceks for button clicks, if true, attempt to move the player
+    if pressed_up:
         player.move_up(WIDTH, HEIGHT)
-    if player.pressed_down:
+    if pressed_down:
         player.move_down(WIDTH, HEIGHT)
-    if player.pressed_left:
+    if pressed_left:
         player.move_left(WIDTH, HEIGHT)
-    if player.pressed_right:
+    if pressed_right:
         player.move_right(WIDTH, HEIGHT)
 
     #chceks for player collisions, if true, resets the game
