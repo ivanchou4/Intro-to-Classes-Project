@@ -13,14 +13,9 @@ class Player:
         self.y = 100
         self.radius = 10
         self.speed = 6
-        self.pressed_up = False
-        self.pressed_left = False
-        self.pressed_right = False
-        self.pressed_down = False
-        self.invulnerable = False
     
     def move_up(self, width: int, height: int) -> None:
-        """Moves the player's circle up
+        """Attempts to moves the player's circle up on the screen, fails if the player is about to go off the screen
         
         Args:
             width: display window width
@@ -33,7 +28,7 @@ class Player:
             self.y -= self.speed
             
     def move_down(self, width: int, height: int) -> None:
-        """Moves the player's circle down
+        """Attempts to moves the player's circle down on the screen, fails if the player is about to go off the screen
         
         Args:
             width: display window width
@@ -46,7 +41,7 @@ class Player:
             self.y += self.speed
             
     def move_left(self, width: int, height: int) -> None:
-        """Moves the player's circle left
+        """Attempts to moves the player's circle left on the screen, fails if the player is about to go off the screen
         
         Args:
             width: display window width
@@ -59,7 +54,7 @@ class Player:
             self.x -= self.speed
             
     def move_right(self, width: int, height: int) -> None:
-        """Moves the player's circle right
+        """Attempts to moves the player's circle right on the screen, fails if the player is about to go off the screen
         
         Args:
             width: display window width
