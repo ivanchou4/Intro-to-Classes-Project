@@ -51,7 +51,6 @@ while running:
             if event.key == K_RIGHT:
                 pressed_right = True
 
-
         elif event.type == KEYUP:
             if event.key == K_UP:
                 pressed_up = False
