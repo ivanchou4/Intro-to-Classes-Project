@@ -22,22 +22,17 @@ clock = pygame.time.Clock()
 pygame.font.init() # you have to call this at the start, 
                    # if you want to use this module.
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
-
-
 balls = []
 squares = []
 button = ShapeCreatorButton(20, 20, 150, 50, "ADD", myfont)
-
 player = Player()
 
 # ---------------------------
 
 running = True
 while running:
-    screen.fill((255, 255, 255))  # always the first drawing command
-        # completely fill the surface object
-    # with white color
-
+    screen.fill((255, 255, 255))  
+    #Ball Movement
     for ball in balls:
         if ball.x + ball.radius > WIDTH or ball.x - ball.radius < 0:
             ball.dx *= -1
@@ -60,8 +55,6 @@ while running:
                 player.pressed_left = True
             if event.key == K_RIGHT:
                 player.pressed_right = True
-
-
         elif event.type == KEYUP:
             if event.key == K_UP:
                 player.pressed_up = False
@@ -71,7 +64,6 @@ while running:
                 player.pressed_left = False
             if event.key == K_RIGHT:
                 player.pressed_right = False
-
         elif event.type == QUIT:
             running = False
         elif event.type == MOUSEBUTTONDOWN:
@@ -80,11 +72,9 @@ while running:
                 if random_num == 1:
                     balls.append(Ball(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50),random.randrange(-5, 5),random.randrange(-5, 5), 40))
                 if random_num == 2:
-                    squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5))
-                
+                    squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5))      
                 print("Button CLicked")
                 
-
     # GAME STATE UPDATES
     # All game math and comparisons happen here
     for square in squares:
@@ -99,9 +89,7 @@ while running:
         player.move_left(WIDTH, HEIGHT)
     if player.pressed_right:
         player.move_right(WIDTH, HEIGHT)
-
-
-        
+ 
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
 
