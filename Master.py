@@ -34,17 +34,6 @@ player = Player()
 
 running = True
 while running:
-    screen.fill((255, 255, 255))  # always the first drawing command
-        # completely fill the surface object
-    # with white color
-
-    for ball in balls:
-        if ball.x + ball.radius > WIDTH or ball.x - ball.radius < 0:
-            ball.dx *= -1
-        if ball.y + ball.radius > HEIGHT or ball.y - ball.radius < 0:
-            ball.dy *= -1  
-        ball.x += ball.dx
-        ball.y += ball.dy
     # EVENT HANDLING
     for event in pygame.event.get():
         if event.type == KEYDOWN:
@@ -92,6 +81,10 @@ while running:
     for square in squares:
         square.move()
 
+    #updates ball positions
+    for ball in balls:
+        ball.move()
+        
     #chceks for button clicks and if player has hit a boundry or not
     if player.pressed_up:
         player.move_up(WIDTH, HEIGHT)
