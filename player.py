@@ -26,22 +26,16 @@ class Player:
         if self.x + self.radius <= width:
             self.x += self.speed
 
-    def on_collision(self, squares, circles):
+    def collision(self, squares, balls):
         for ball in balls:
             distance = math.sqrt((ball.x - self.x)**2 + (ball.y - self.y)**2)
             if distance < ball.radius + self.radius:
                 return True
+        for square in squares:
+            square_radius = square.size/2
+            distance = math.sqrt(((square.x + square_radius) - self.x)**2 + ((square.y + square_radius) - self.y)**2)
+            if distance < square_radius + self.radius:
+                return True
             
-    
     def draw(self, surface):        
         pygame.draw.circle(surface, (0,0,10), (self.x,self.y), self.radius)
-
-
-
-
-
-# def dist_2_points(x1, y1, x2, y2):
-#     return math.sqrt((x2-x1)**2 + (y2-y1)**2)
-
-# def detect_collision(distance, circle_r1, circle_r2):
-#     return distance < circle_r1 + circle_r2
