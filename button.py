@@ -15,7 +15,6 @@ class ShapeCreatorButton:
         Returns:
             None
         """
-        print("Creating a button")
         self.x = x
         self.y = y
         self.width = w
