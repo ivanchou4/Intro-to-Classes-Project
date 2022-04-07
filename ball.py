@@ -35,3 +35,20 @@ class Ball:
             None
         """
         pygame.draw.circle(surface, self.color, (self.x, self.y), self.radius)
+
+    def move(self, WIDTH: int, HEIGHT: int) -> None:
+        """Reverses the direction of the ball/circle object when it hits the width and height of the display window  
+        
+        Args:
+            WIDTH: display window width
+            HEIGHT: display window length 
+        
+        Returns:
+            None
+        """
+        if self.x + self.radius > WIDTH or self.x - self.radius < 0:
+            self.dx *= -1
+        if self.y + self.radius > HEIGHT or self.y - self.radius < 0:
+            self.dy *= -1  
+        self.x += self.dx
+        self.y += self.dy
