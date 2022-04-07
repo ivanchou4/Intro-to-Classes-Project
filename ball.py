@@ -41,7 +41,7 @@ class Ball:
         
         Args:
             WIDTH: display window width
-            HEIGHT: display window length 
+            HEIGHT: display window height 
         
         Returns:
             None
