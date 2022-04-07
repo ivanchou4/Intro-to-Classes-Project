@@ -1,4 +1,3 @@
-
 import pygame
 import random
 from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
@@ -67,8 +66,6 @@ while running:
                     balls.append(Ball(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50),random.randrange(-5, 5),random.randrange(-5, 5), 40))
                 if random_num == 2:
                     squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5))
-                
-                print("Button CLicked")
                 
 
     # GAME STATE UPDATES
