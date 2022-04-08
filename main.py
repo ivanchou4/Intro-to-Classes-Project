@@ -31,7 +31,7 @@ pressed_down = False
 pressed_left = False
 pressed_right = False
 
-player = Player()
+player = Player(100, 100, 10, 6)
 
 # ---------------------------
 
