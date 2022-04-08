@@ -3,16 +3,16 @@ import math
 
 
 class Player:
-    def __init__(self):
+    def __init__(self, x, y, radius, speed):
         """Constructs attributes related to the class, runs when an instance of this class has been made
 
         Args:
             None
         """
-        self.x= 100
-        self.y = 100
-        self.radius = 10
-        self.speed = 6
+        self.x= x
+        self.y = y
+        self.radius = radius
+        self.speed = speed
     
     def move_up(self, width: int, height: int) -> None:
         """Attempts to moves the player's circle up on the screen, fails if the player is about to go off the screen
