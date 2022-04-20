@@ -5,7 +5,7 @@ from ball import Ball
 from button import ShapeCreatorButton
 from square import Square
 from player import Player
-
+from projectile import Projectile
 
 pygame.init()
 
@@ -32,6 +32,7 @@ pressed_left = False
 pressed_right = False
 
 player = Player(100, 100, 10, 6)
+projectiles = []
 
 # ---------------------------
 
@@ -64,6 +65,7 @@ while running:
         elif event.type == QUIT:
             running = False
         elif event.type == MOUSEBUTTONDOWN:
+            projectiles.append(Projectile(player.x, player.y, 2, event.pos[0], event.pos[1], 10))
             if button.get_rect().collidepoint(event.pos): 
                 random_num = random.randint(1,2)
                 if random_num == 1:
@@ -74,11 +76,29 @@ while running:
 
     # GAME STATE UPDATES
     # All game math and comparisons happen here
-    
+
+    #updates projectile positions and checks for its collisions
+    for projectile in projectiles:
+        projectile.move()
+        for square in squares:
+            if projectile.on_hit_square(square):
+                try:
+                    squares.remove(square)
+                    projectiles.remove(projectile)
+                except ValueError:
+                    pass
+        for ball in balls: 
+            if projectile.on_hit_ball(ball):
+                try:
+                    balls.remove(ball)
+                    projectiles.remove(projectile)
+                except ValueError:
+                    pass
+        
     #updates square positions
     for square in squares:
         square.move()
-
+            
     #updates ball positions
     for ball in balls:
         ball.move(WIDTH, HEIGHT)
@@ -92,11 +112,12 @@ while running:
         player.move_left(WIDTH, HEIGHT)
     if pressed_right:
         player.move_right(WIDTH, HEIGHT)
-
+        
     #chceks for player collisions, if true, resets the game
     if player.collision(squares, balls):
         squares = []
         balls = []
+        projectiles = []
         player.x = 100
         player.y = 100
         
@@ -113,6 +134,8 @@ while running:
 
     button.draw(screen)
 
+    for projectile in projectiles:
+        projectile.draw(screen)
 
     # Must be the last two lines
     # of the game loop
