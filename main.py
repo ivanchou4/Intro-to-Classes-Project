@@ -77,7 +77,7 @@ while running:
                 if random_num == 1:
                     balls.append(Ball(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50),random.randrange(-5, 5),random.randrange(-5, 5), 40))
                 if random_num == 2:
-                    squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5, 10))
+                    squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5, 20))
                 
             else:
                 projectiles.append(Projectile(player.x, player.y, 2, event.pos[0], event.pos[1], 10))
@@ -90,14 +90,14 @@ while running:
         for projectile in projectiles:
             projectile.move()
             for square in squares:
-                if projectile.on_hit_square(square):
+                if projectile.on_hit(square.circle_x, square.circle_y, square.circle_radius):
                     try:
                         squares.remove(square)
                         projectiles.remove(projectile)
                     except ValueError:
                         pass
             for ball in balls: 
-                if projectile.on_hit_ball(ball):
+                if projectile.on_hit(ball.x, ball.y, ball.radius):
                     try:
                         balls.remove(ball)
                         projectiles.remove(projectile)
@@ -129,7 +129,7 @@ while running:
             projectiles = []
             player.x = 100
             player.y = 100
-        
+            
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
 
@@ -149,7 +149,7 @@ while running:
     if len(balls) + len(squares) > 10: 
         pause_button.draw(screen)
         play_button.draw(screen)
-        
+
     # Must be the last two lines
     # of the game loop
     pygame.display.flip()
