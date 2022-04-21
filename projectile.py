@@ -34,32 +34,19 @@ class Projectile:
         self.x += self.speed_multiplier * self.unit_vector[0]
         self.y += self.speed_multiplier * self.unit_vector[1]
 
-    def on_hit_ball(self, ball: object) -> bool:
-        """Detects if the projectile's circle has hit a ball object.
+    def on_hit(self, circle_x, circle_y, circle_radius) -> bool:
+        """Detects if the projectile's circle has hit the circle hitbox given in the parameters
 
         Args:
-            ball: A ball object
+            circle_x = Circle hitbox's x position
+            circle_y = Circle hitbox's y position
+            circle_radius = Circle hitbox's radius
 
         Returns:
-            True if the projectile hits a ball. False otherwise
+            True if the projectile hits the hitbox. False otherwise
         """
-        distance = math.sqrt((ball.x - self.x)**2 + (ball.y - self.y)**2)
-        if distance < ball.radius + self.radius:
-            return True
-        return False
-
-    def on_hit_square(self, square: object) -> bool:
-        """Detects if the projectile's circle has hit a square object.
-
-        Args:
-            square: A square object
-
-        Returns:
-            True if the projectile hits a square. False otherwise
-        """
-        square_radius = square.size/2
-        distance = math.sqrt(((square.x + square_radius) - self.x)**2 + ((square.y + square_radius) - self.y)**2)
-        if distance < square_radius + self.radius:
+        distance = math.sqrt((circle_x - self.x)**2 + (circle_y - self.y)**2)
+        if distance < circle_radius + self.radius:
             return True
         return False
             
