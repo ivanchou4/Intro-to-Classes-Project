@@ -3,10 +3,16 @@ import math
 
 
 class Player:
-    def __init__(self, x, y, radius, speed):
+    def __init__(self, x: int, y: int, radius: int, speed: int) -> None:
         """Constructs attributes related to the class, runs when an instance of this class has been made
 
         Args:
+            x: The player's x position
+            y: The player's y position
+            radius: The player's circle radius
+            speed: The player's speed during movements
+        
+        Returns:
             None
         """
         self.x= x
@@ -81,12 +87,10 @@ class Player:
             if distance < ball.radius + self.radius:
                 return True
         for square in squares:
-            square_radius = square.size/2
-            distance = math.sqrt(((square.x + square_radius) - self.x)**2 + ((square.y + square_radius) - self.y)**2)
-            if distance < square_radius + self.radius:
+            distance = math.sqrt((square.circle_x - self.x)**2 + (square.circle_y - self.y)**2)
+            if distance < square.circle_radius + self.radius:
                 return True
-
-            return False
+        return False
                 
     def draw(self, surface: pygame.Surface) -> None:
         """Draws the player's circle onto the screen
