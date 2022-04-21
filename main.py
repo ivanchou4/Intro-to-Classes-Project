@@ -5,9 +5,7 @@ from ball import Ball
 from button import ShapeCreatorButton
 from square import Square
 from player import Player
-from projcetile import Projectile
-from pause_button import PauseButton
-from play_button import PlayButton
+from projectile import Projectile
 
 pygame.init()
 
@@ -26,9 +24,9 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
 balls = []
 squares = []
-play_button = PlayButton(500, 20, 100, 50, "Play", myfont)
-pause_button = PauseButton(320, 20, 100, 50, "Pause", myfont)  
-button = ShapeCreatorButton(20, 20, 150, 50, "ADD", myfont)
+play_button = ShapeCreatorButton(500, 20, 100, 50, (0, 200, 0), "Play", myfont)
+pause_button = ShapeCreatorButton(320, 20, 100, 50,(200, 0, 0), "Pause", myfont)  
+button = ShapeCreatorButton(20, 20, 150, 50,(200, 200, 200),  "ADD", myfont)
 pause = False
 pressed_up = False
 pressed_down = False
