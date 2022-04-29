@@ -1,11 +1,10 @@
 import pygame
 import random
-from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT
+from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_r
 from ball import Ball
 from button import ShapeCreatorButton
-from square import Square
 from player import Player
-from projectile import Projectile
+from user_interface import UserInterface
 
 pygame.init()
 
@@ -24,9 +23,7 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
 balls = []
 squares = []
-play_button = ShapeCreatorButton(500, 20, 100, 50, (0, 200, 0), "Play", myfont)
-pause_button = ShapeCreatorButton(320, 20, 100, 50,(200, 0, 0), "Pause", myfont)  
-button = ShapeCreatorButton(20, 20, 150, 50,(200, 200, 200),  "ADD", myfont)
+ui = UserInterface(0, HEIGHT - 100, WIDTH, 100, (100, 50, 0), myfont, screen)
 pause = False
 pressed_up = False
 pressed_down = False
@@ -34,7 +31,7 @@ pressed_left = False
 pressed_right = False
 
 player = Player(100, 100, 10, 6)
-projectiles = []
+bullets = []
 
 # ---------------------------
 
@@ -53,7 +50,9 @@ while running:
                 pressed_left = True
             if event.key == K_RIGHT:
                 pressed_right = True
-
+            if event.key == K_r:
+                player.gun.reload()
+        
         elif event.type == KEYUP:
             if event.key == K_UP:
                 pressed_up = False
@@ -67,40 +66,31 @@ while running:
         elif event.type == QUIT:
             running = False
         elif event.type == MOUSEBUTTONDOWN:
-            if pause_button.get_rect().collidepoint(event.pos):
+            if ui.pause_button.get_rect().collidepoint(event.pos):
                 pause = True
-            if play_button.get_rect().collidepoint(event.pos):
+            elif ui.play_button.get_rect().collidepoint(event.pos):
                 pause = False
-
-            if button.get_rect().collidepoint(event.pos): 
-                random_num = random.randint(1,2)
-                if random_num == 1:
-                    balls.append(Ball(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50),random.randrange(-5, 5),random.randrange(-5, 5), 40))
-                if random_num == 2:
-                    squares.append(Square(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-50), 5, 5, 20))
-                
+            elif ui.button.get_rect().collidepoint(event.pos):
+                balls.append(Ball(random.randrange(50, WIDTH-50), random.randrange(50, HEIGHT-150),random.randrange(-5, 5),random.randrange(-5, 5), 40))
+            elif ui.get_rect().collidepoint(event.pos):
+                pass
             else:
-                projectiles.append(Projectile(player.x, player.y, 2, event.pos[0], event.pos[1], 10))
+                if player.gun._magazine_bullets > 0:   
+                    bullets.append(player.gun.shoot(player.x, player.y, event.pos[0], event.pos[1]))
 
     # GAME STATE UPDATES
     # All game math and comparisons happen here
 
-    #updates projectile positions and checks for its collisions
+    #updates bullet positions and checks for its collisions
     if pause == False:
-        for projectile in projectiles:
-            projectile.move()
-            for square in squares:
-                if projectile.on_hit(square.circle_x, square.circle_y, square.circle_radius):
-                    try:
-                        squares.remove(square)
-                        projectiles.remove(projectile)
-                    except ValueError:
-                        pass
+        for bullet in bullets:
+            bullet.move()
             for ball in balls: 
-                if projectile.on_hit(ball.x, ball.y, ball.radius):
+                if bullet.on_hit(ball.x, ball.y, ball.radius):
+                    player.gun.set_bullets(player.gun.get_bullets() + 1)
                     try:
                         balls.remove(ball)
-                        projectiles.remove(projectile)
+                        bullets.remove(bullet)
                     except ValueError:
                         pass
             
@@ -122,14 +112,12 @@ while running:
         if pressed_right:
             player.move_right(WIDTH, HEIGHT)
             
-        #chceks for player collisions, if true, resets the game
+        #checks for player collisions, if true, resets the game
         if player.collision(squares, balls):
             squares = []
             balls = []
-            projectiles = []
-            player.x = 100
-            player.y = 100
-            
+            bullets = []
+            player = Player(100, 100, 10, 6)
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
 
@@ -141,15 +129,11 @@ while running:
     for square in squares:
         square.draw(screen)
 
-    button.draw(screen)
+    for bullet in bullets:
+        bullet.draw(screen)
 
-    for projectile in projectiles:
-        projectile.draw(screen)
-
-    if len(balls) + len(squares) > 10: 
-        pause_button.draw(screen)
-        play_button.draw(screen)
-
+    ui.draw(player.gun.get_bullets(), player.gun.get_magazine_capacity(), player.gun.get_magazine_bullets(), myfont)
+    
     # Must be the last two lines
     # of the game loop
     pygame.display.flip()
