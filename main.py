@@ -2,7 +2,6 @@ import pygame
 import random
 from pygame.locals import K_ESCAPE, KEYDOWN, KEYUP, QUIT, MOUSEBUTTONDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_r
 from ball import Ball
-from button import ShapeCreatorButton
 from player import Player
 from user_interface import UserInterface
 
@@ -118,8 +117,13 @@ while running:
             balls = []
             bullets = []
             player = Player(100, 100, 10, 6)
+
     # DRAWING
-    screen.fill((255, 255, 255))  # always the first drawing command
+    if not pause:
+        screen.fill((255, 255, 255))
+
+    else:
+        screen.fill((200, 200, 200))
 
     player.draw(screen)
     
