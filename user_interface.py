@@ -22,14 +22,16 @@ class UserInterface:
         self.button.draw(self.surface)
 
         #bullets left
-        self.ui_bullets = font.render(str(bullets), False, (255, 255, 255))
-        self.surface.blit(self.ui_bullets, (20, 425))
+        self.surface.blit(font.render(str(bullets), False, (255, 255, 255)), (20, 425))
 
         #magazine
         self.offset = 0
         for num in range(0, magazine_bullets):
-            pygame.draw.circle(self.surface, (0, 0, 0), (110 + self.offset, 435), 10)
+            pygame.draw.circle(self.surface, (0, 0, 0), (100 + self.offset, 435), 10)
             self.offset += 25
+
+        #helper text
+        self.surface.blit(font.render("R to reload", False, (255, 255, 255)), (97, 455))
 
 class ShapeCreatorButton:
     def __init__(self, x: int, y: int, w: int, h: int, colour: tuple, text: str, font):
