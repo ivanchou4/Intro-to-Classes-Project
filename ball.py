@@ -48,7 +48,7 @@ class Ball:
         """
         if self.x + self.radius > WIDTH or self.x - self.radius < 0:
             self.dx *= -1
-        if self.y + self.radius > HEIGHT or self.y - self.radius < 0:
+        if self.y + self.radius > HEIGHT - 100 or self.y - self.radius < 0:
             self.dy *= -1  
         self.x += self.dx
         self.y += self.dy
