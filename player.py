@@ -154,12 +154,12 @@ class Gun:
         """Sets a new magazine capacity
         
         Args:
-            new_capacity = A non-negative number
+            new_capacity = A positive number
         
         Returns:
             None
         """
-        if new_capacity >= 0:
+        if new_capacity > 0:
             self._magazine_capacity = new_capacity
         else:
             raise ValueError("You cannot have a magazine capacity that is less than zero.")
