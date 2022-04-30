@@ -73,11 +73,10 @@ class Player:
         if self.x + self.radius <= width:
             self.x += self.speed
 
-    def collision(self, squares: list, balls: list) -> bool:
-        """Detects if the player's circle has a collision with the list of objects given in the parameters
+    def collision(self, balls: list) -> bool:
+        """Detects if the player's circle has a collision with the list of balls given in the parameters
 
         Args:
-            squares: A list of squares
             balls: A list of balls
 
         Returns:
@@ -86,10 +85,6 @@ class Player:
         for ball in balls:
             distance = math.sqrt((ball.x - self.x)**2 + (ball.y - self.y)**2)
             if distance < ball.radius + self.radius:
-                return True
-        for square in squares:
-            distance = math.sqrt((square.circle_x - self.x)**2 + (square.circle_y - self.y)**2)
-            if distance < square.circle_radius + self.radius:
                 return True
         return False
     
@@ -119,7 +114,7 @@ class Gun:
         self._magazine_capacity = bullet_capacity
         self._magazine_bullets = bullet_capacity
         
-    def shoot(self, x: int, y: int, x_end: int, y_end: int):
+    def shoot(self, x: int, y: int, x_end: int, y_end: int) -> object:
         """Returns a Bullet class if there are builllets avaliable
         
         Args:
@@ -155,7 +150,15 @@ class Gun:
         else:
             raise ValueError("You cannot have a negative amount of bullets.")
 
-    def set_magazine_capacity(self, new_capacity: int):
+    def set_magazine_capacity(self, new_capacity: int) -> None:
+        """Sets a new magazine capacity
+        
+        Args:
+            new_capacity = A non-negative number
+        
+        Returns:
+            None
+        """
         if new_capacity >= 0:
             self._magazine_capacity = new_capacity
         else:
