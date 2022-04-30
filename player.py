@@ -164,13 +164,13 @@ class Gun:
         else:
             raise ValueError("You cannot have a magazine capacity that is less than zero.")
 
-    def get_bullets(self):
+    def get_bullets(self) -> int:
         return self._bullets
 
-    def get_magazine_bullets(self):
+    def get_magazine_bullets(self) -> int:
         return self._magazine_bullets
 
-    def get_magazine_capacity(self):
+    def get_magazine_capacity(self) -> int:
         return self._magazine_capacity
 
 class Bullet:
