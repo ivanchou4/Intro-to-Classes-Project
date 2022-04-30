@@ -21,7 +21,6 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
 
 balls = []
-squares = []
 ui = UserInterface(0, HEIGHT - 100, WIDTH, 100, (100, 50, 0), myfont, screen)
 pause = False
 pressed_up = False
@@ -74,7 +73,8 @@ while running:
             elif ui.get_rect().collidepoint(event.pos):
                 pass
             else:
-                if player.gun._magazine_bullets > 0:   
+                if player.gun._magazine_bullets > 0:
+                    #creates a bullet object if there are bullets in the magazine
                     bullets.append(player.gun.shoot(player.x, player.y, event.pos[0], event.pos[1]))
 
     # GAME STATE UPDATES
@@ -92,10 +92,6 @@ while running:
                         bullets.remove(bullet)
                     except ValueError:
                         pass
-            
-        #updates square positions
-        for square in squares:
-            square.move()
                 
         #updates ball positions
         for ball in balls:
@@ -112,8 +108,7 @@ while running:
             player.move_right(WIDTH, HEIGHT)
             
         #checks for player collisions, if true, resets the game
-        if player.collision(squares, balls):
-            squares = []
+        if player.collision(balls):
             balls = []
             bullets = []
             player = Player(100, 100, 10, 6)
@@ -129,9 +124,6 @@ while running:
     
     for ball in balls:
         ball.draw(screen)
-
-    for square in squares:
-        square.draw(screen)
 
     for bullet in bullets:
         bullet.draw(screen)
